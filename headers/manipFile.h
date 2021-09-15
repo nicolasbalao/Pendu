@@ -1,0 +1,1 @@
+void chooseWord(char *mysteryWord, int TAILLE_MAX);

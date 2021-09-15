@@ -10,7 +10,7 @@ void printTableau(char *tableau, int sizeTableau)
     printf("\n");
 }
 
-void initInputWord(char *inputWord, int sizeTableau)
+void initLetterFind(char *inputWord, int sizeTableau)
 {
     for (int i = 0; i < sizeTableau; i++)
     {
@@ -47,10 +47,21 @@ void testLetterInWord(char letter, char *mysteryWord, char *InputWord, int sizeT
     }
 }
 
-char lireCaractere()
+char readCaractere()
 {
     char caractere = getchar();
     while (getchar() != '\n') //lit tous les caractère jusqu'a \n
         ;
     return caractere;
+}
+
+void replaceReturnLine(char *chaine, int size)
+{
+    for (int i = 0; i < size; i++)
+    {
+        if (chaine[i] == '\n')
+        {
+            chaine[i] = '\0';
+        }
+    }
 }
