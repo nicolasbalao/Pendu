@@ -50,6 +50,7 @@ void game()
     }
     else
     {
-        printf("Vous avez gangner GG! \n\n\n");
+
+        printf("Vous avez trouve le mot: %s GG! \n\n\n", mysteryWord);
     }
 }

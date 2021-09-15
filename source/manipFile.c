@@ -33,7 +33,6 @@ void chooseWord(char *mysteryWord, int TAILLE_MAX)
         {
             srand(time(NULL)); // reset the seed
             lineChoosen = rand() % nbreLine;
-            printf("lineChoosen: %d \n", lineChoosen);
         }
         else
         {
