@@ -5,6 +5,13 @@
 #include "../headers/manipString.h"
 #include "../headers/manipFile.h"
 #define TAILLE_MAX 20
+
+/*TODO:
+
+ [+]regarder la correction et prendre les parties mieux faites.
+
+*/
+
 void game()
 {
     //Declaration des variable
