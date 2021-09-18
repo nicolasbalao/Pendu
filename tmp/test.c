@@ -1,33 +1,46 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
-typedef struct Test Test;
-
-struct Test
+void viderBuffer()
 {
-    int lol;
-    char txt;
-};
+    int c = 0;
+    while (c != '\n' && c != EOF)
+    {
+        c = getchar();
+    }
+}
+
+int lire(char *chaine, int longueur)
+{
+    char *positionEntree = NULL;
+
+    if (fgets(chaine, longueur, stdin) != NULL)
+    {
+        positionEntree = strchr(chaine, '\n');
+        if (positionEntree != NULL)
+        {
+            *positionEntree = '\0';
+        }
+        else
+        {
+            viderBuffer();
+        }
+        return 1;
+    }
+    else
+    {
+        viderBuffer();
+        return 0;
+    }
+}
 
 int main(int argc, char *argv[])
 {
-    Test stp[2];
-    initStructs(stp);
-
-    for (int i = 0; i < 2; i++)
-    {
-        printf("stp[%d] lol: %d \n", i + 1, stp[i].lol);
-        printf("stp[%d] txt: %c \n", i + 1, stp[i].txt);
-    }
+    char nom[20];
+    printf("Quelle est votre nom: ");
+    lire(nom, 20);
+    printf("Votre nom est: %s", nom);
 
     return 0;
-}
-
-void initStructs(Test *s)
-{
-    for (int i = 0; i < 2; i++)
-    {
-        s[i].lol = 3;
-        s[i].txt = 'c';
-    }
 }

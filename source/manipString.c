@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 #include "../headers/player.h"
@@ -12,19 +13,27 @@ void printTableau(char *tableau, int sizeTableau)
     printf("\n");
 }
 
-void initLetterFind(char *inputWord, int sizeTableau)
-{
-    for (int i = 0; i < sizeTableau; i++)
-    {
-        inputWord[i] = '*';
-    }
-}
+// void initLetterFind(char *inputWord, int sizeTableau, char *mysteryWord)
+// {
 
-int testWin(char *mysteryWord, char *playWord, int sizeTableau)
+//     for (int i = 0; i < sizeTableau; i++)
+//     {
+//         if (mysteryWord[i] == mysteryWord[0])
+//         {
+//             inputWord[i] = mysteryWord[i];
+//         }
+//         else
+//         {
+//             inputWord[i] = '*';
+//         }
+//     }
+// }
+
+int testWin(char *mysteryWord, char *playerWord, int sizeTableau)
 {
     for (int i = 0; i < sizeTableau; i++)
     {
-        if (mysteryWord[i] != playWord[i])
+        if (mysteryWord[i] != playerWord[i])
         {
             return 0;
         }
@@ -57,9 +66,9 @@ char readCaractere()
     return caractere;
 }
 
-void replaceReturnLine(char *chaine, int size)
+void replaceReturnLine(char *chaine)
 {
-    for (int i = 0; i < size; i++)
+    for (int i = 0; i < strlen(chaine); i++)
     {
         if (chaine[i] == '\n')
         {

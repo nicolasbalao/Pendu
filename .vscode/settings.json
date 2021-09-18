@@ -1,5 +1,6 @@
 {
     "files.associations": {
-        "manipstring.h": "c"
+        "manipstring.h": "c",
+        "manipfile.h": "c"
     }
 }
