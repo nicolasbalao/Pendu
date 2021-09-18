@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <string.h>
 
+#include "../headers/player.h"
+
 void printTableau(char *tableau, int sizeTableau)
 {
     for (int i = 0; i < sizeTableau; i++)
@@ -18,16 +20,16 @@ void initLetterFind(char *inputWord, int sizeTableau)
     }
 }
 
-int testWin(char *tableau1, char *tableau2, int sizeTableau)
+int testWin(char *mysteryWord, char *playWord, int sizeTableau)
 {
     for (int i = 0; i < sizeTableau; i++)
     {
-        if (tableau1[i] != tableau2[i])
+        if (mysteryWord[i] != playWord[i])
         {
-            return 1;
+            return 0;
         }
     }
-    return 0;
+    return 1;
 }
 
 void testLetterInWord(char letter, char *mysteryWord, char *InputWord, int sizeTableau, int *coup)

@@ -2,23 +2,21 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "../headers/player.h"
 #include "../headers/manipString.h"
 #include "../headers/manipFile.h"
 #define TAILLE_MAX 20
 
-/*TODO:
-
- [+]regarder la correction et prendre les parties mieux faites.
-
-*/
+//PROTOTYPE
+void initPlayer(Player *c, int nbrePlayer);
 
 void game()
 {
     //Declaration des variable
     char mysteryWord[TAILLE_MAX] = "";
-    char letterFind[strlen(mysteryWord)];
-    int nbreCoup = 10;
-    char letter = 0;
+    int nbrePlayer = 0;
+    //init Structure
+    Player player[TAILLE_MAX];
 
     //Choose Random Word
     chooseWord(mysteryWord, TAILLE_MAX);
@@ -29,35 +27,73 @@ void game()
 
     //SET UP
     printf("Bienvenue dans le pendu ! \n\n\n");
+    printf("Combien de joeur: ");
+    scanf("%d", &nbrePlayer);
 
     //INIT letterfind a *****
-    initLetterFind(letterFind, sizeMysteryWord);
+
+    for (int i = 0; i < nbrePlayer; i++)
+    {
+        initLetterFind(player[i].playerWord, sizeMysteryWord);
+    }
+
+    //init Player coup
+    initPlayer(player, nbrePlayer);
 
     //Game loop
-    while (testWin(mysteryWord, letterFind, sizeMysteryWord) == 1 && nbreCoup != 0)
+    int win = 0;
+    do
     {
+        for (int i = 0; i < nbrePlayer; i++)
+        {
 
-        letter = 0;
-        //Trame du jeux
-        printf("Il vous reste %d coup a jouer \n", nbreCoup);
-        printf("Quelle est le mot secret: ");
-        printTableau(letterFind, sizeMysteryWord);
-        printf("\n");
+            printf("\e[1;1H\e[2J"); // For clear the console
 
-        printf("Proposer un letter: ");
-        letter = readCaractere(); // focntion == scanf mais on exclus le \n char
-        printf("\n");
+            printf("TOUR JOUEUR %d \n\n", i + 1);
+            player[i].letter = 0;
+            //Trame du jeux
+            printf("Il vous reste %d coup a jouer \n", player[i].nbreCoup);
+            printf("Quelle est le mot secret: ");
+            printTableau(player[i].playerWord, sizeMysteryWord);
+            printf("\n");
 
-        testLetterInWord(letter, mysteryWord, letterFind, sizeMysteryWord, &nbreCoup); // prendre chaque letter des 2 tableau et le compare si trouver ajoute a letter find
+            printf("Joeur %d roposer un letter: ", i + 1);
+            player[i].letter = readCaractere(); // focntion == scanf mais on exclus le \n char
+            printf("\n");
+        }
+        for (int i = 0; i < nbrePlayer; i++)
+        {
+            testLetterInWord(player[i].letter, mysteryWord, player[i].playerWord, sizeMysteryWord, &player[i].nbreCoup); // prendre chaque letter des 2 tableau et le compare si trouver ajoute a letter find
+        }
+        for (int i = 0; i < nbrePlayer; i++)
+        {
+            win = testWin(mysteryWord, player[i].playerWord, sizeMysteryWord);
+            if (win == 1)
+            {
+                break;
+            }
+        }
+
+    } while (win != 1);
+
+    for (int i = 0; i < nbrePlayer; i++)
+    {
+        if (player[0].nbreCoup == 0)
+        {
+            printf("Vous avez perdu dommage");
+        }
+        else
+        {
+            printf("Vous avez trouve le mot: %s GG Player %d! \n\n\n", mysteryWord, i + 1);
+            break;
+        }
     }
+}
 
-    if (nbreCoup == 0)
+void initPlayer(Player *c, int nbrePlayer)
+{
+    for (int i = 0; i < nbrePlayer; i++)
     {
-        printf("Vous avez perdu dommage");
-    }
-    else
-    {
-
-        printf("Vous avez trouve le mot: %s GG! \n\n\n", mysteryWord);
+        c[i].nbreCoup = 10;
     }
 }
