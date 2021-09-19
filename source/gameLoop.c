@@ -3,6 +3,7 @@
 #include <string.h>
 #include <time.h>
 
+#include "../headers/drawPendu.h"
 #include "../headers/player.h"
 #include "../headers/manipString.h"
 #include "../headers/manipFile.h"
@@ -81,10 +82,14 @@ void game(int gamesMode, int nbrePlayer)
                 break;
             }
 
-            //printf("\e[1;1H\e[2J"); // For clear the console
+            printf("\e[1;1H\e[2J"); // For clear the console
 
             printf("TOUR DE %s \n\n", player[i].name);
             player[i].letter = 0;
+
+            drawPendu(player[i].nbreCoup);
+            printf("\n\n");
+
             //Trame du jeux
             printf("Il vous reste %d coup a jouer \n", player[i].nbreCoup);
             printf("Quelle est le mot secret: ");
@@ -94,14 +99,9 @@ void game(int gamesMode, int nbrePlayer)
             printf("%s roposer un letter: ", player[i].name);
             player[i].letter = readCaractere(); // focntion == scanf mais on exclus le \n char
             printf("\n");
-        }
-        for (int i = 0; i < nbrePlayer; i++)
-        {
+
             testLetterInWord(player[i].letter, mysteryWord, player[i].playerWord, sizeMysteryWord, &player[i].nbreCoup); // prendre chaque letter des 2 tableau et le compare si trouver ajoute a letter find
-        }
-        //test Win or Loose
-        for (int i = 0; i < nbrePlayer; i++)
-        {
+
             win = testWin(mysteryWord, player[i].playerWord, sizeMysteryWord);
             if (win == 1)
             {
@@ -111,27 +111,36 @@ void game(int gamesMode, int nbrePlayer)
             }
             if (player[i].nbreCoup == 0)
             {
-                printf("%s a perdu dommage \n", player[i].name);
+                drawPendu(player[i].nbreCoup);
+                printf("%s est mort PENDU !! \n", player[i].name);
                 player[i].statu = 1;
                 playerLoose++;
             }
         }
+        // for (int i = 0; i < nbrePlayer; i++)
+        // {
+        //     testLetterInWord(player[i].letter, mysteryWord, player[i].playerWord, sizeMysteryWord, &player[i].nbreCoup); // prendre chaque letter des 2 tableau et le compare si trouver ajoute a letter find
+        // }
+        // //test Win or Loose
+        // for (int i = 0; i < nbrePlayer; i++)
+        // {
+        //     win = testWin(mysteryWord, player[i].playerWord, sizeMysteryWord);
+        //     if (win == 1)
+        //     {
+        //         play = 0;
+        //         printf("Bravo %s a gagner!! \n", player[i].name);
+        //         break;
+        //     }
+        //     if (player[i].nbreCoup == 0)
+        //     {
+        //         drawPendu(player[i].nbreCoup);
+        //         printf("%s est mort PENDU !! \n", player[i].name);
+        //         player[i].statu = 1;
+        //         playerLoose++;
+        //     }
+        // }
 
     } while (play == 1 && playerLoose != nbrePlayer);
-
-    // FIXME: joueur ne perde pas quand ils ont plus de coup a jouer
-
-    // for (int i = 0; i < nbrePlayer; i++)
-    // {
-    //     if (player[0].nbreCoup == 0)
-    //     {
-    //     }
-    //     else
-    //     {
-    //         printf("Vous avez trouve le mot: %s GG %s ! \n\n\n", mysteryWord, player[i].name);
-    //         break;
-    //     }
-    // }
 }
 
 void clearBuffer()

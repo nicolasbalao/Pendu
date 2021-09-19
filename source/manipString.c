@@ -13,22 +13,6 @@ void printTableau(char *tableau, int sizeTableau)
     printf("\n");
 }
 
-// void initLetterFind(char *inputWord, int sizeTableau, char *mysteryWord)
-// {
-
-//     for (int i = 0; i < sizeTableau; i++)
-//     {
-//         if (mysteryWord[i] == mysteryWord[0])
-//         {
-//             inputWord[i] = mysteryWord[i];
-//         }
-//         else
-//         {
-//             inputWord[i] = '*';
-//         }
-//     }
-// }
-
 int testWin(char *mysteryWord, char *playerWord, int sizeTableau)
 {
     for (int i = 0; i < sizeTableau; i++)
