@@ -17,10 +17,9 @@ void initPlayer(Player *asPlayer, int nbrPlayer)
     }
 }
 
-void updatePlayerStatu(Player *asPlayer, int *nbrePlayer, int playerChoose)
+void updatePlayerStatu(Player *asPlayer, int playerChoose)
 {
-    asPlayer[playerChoose].statu = 1;
-    *nbrePlayer -= 1;
+    asPlayer[playerChoose].statu = 2;
 }
 
 void PlayerWord(Player *c, int nbrePlayer, int lenght, char *mysteryWord)
