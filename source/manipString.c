@@ -25,20 +25,24 @@ int testWin(char *mysteryWord, char *playerWord, int sizeTableau)
     return 1;
 }
 
-void testLetterInWord(char letter, char *mysteryWord, char *InputWord, int sizeTableau, int *coup)
+void testLetterInWord(Player *asPlayer, char *mysteryWord, int sizeTableau)
 {
     int winRound = 0;
     for (int i = 0; i < sizeTableau; i++)
     {
-        if (letter == mysteryWord[i])
+        if (asPlayer->letter == mysteryWord[i])
         {
-            InputWord[i] = letter;
+            asPlayer->playerWord[i] = mysteryWord[i];
             winRound = 1;
         }
     }
     if (winRound == 0)
     {
-        *coup = *coup - 1;
+        asPlayer->nbreCoup -= 1;
+        asPlayer->letterWrong[asPlayer->indexLetterWrong] = asPlayer->letter;
+        asPlayer->indexLetterWrong++;
+
+        // *coup = *coup - 1;
     }
 }
 

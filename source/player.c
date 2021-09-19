@@ -9,11 +9,17 @@ void initPlayer(Player *asPlayer, int nbrPlayer)
 
     for (int i = 0; i < nbrPlayer; i++)
     {
-
         asPlayer[i].nbreCoup = 10;
         asPlayer[i].statu = 0;
+        asPlayer[i].indexLetterWrong = 0;
         printf("Player %d name: ", i + 1);
         scanf("%s", asPlayer[i].name);
+
+        //init letter Wrong of player
+        for (int j = 0; j < 10; j++)
+        {
+            asPlayer[i].letterWrong[j] = '_';
+        }
     }
 }
 
@@ -39,6 +45,7 @@ void PlayerWord(Player *c, int nbrePlayer, int lenght, char *mysteryWord)
             {
                 c[i].playerWord[j] = '*';
             }
+            //init letter Wrong of player
         }
     }
 }

@@ -92,6 +92,9 @@ void game(int gamesMode, int nbrePlayer)
             player[i].letter = 0;
 
             drawPendu(player[i].nbreCoup);
+            printf("\n");
+            printf("Wrong letter: ");
+            printTableau(player[i].letterWrong, strlen(player[i].letterWrong)); // print letter wrong
             printf("\n\n");
 
             //Trame du jeux
@@ -104,7 +107,7 @@ void game(int gamesMode, int nbrePlayer)
             player[i].letter = readCaractere(); // focntion == scanf mais on exclus le \n char
             printf("\n");
 
-            testLetterInWord(player[i].letter, mysteryWord, player[i].playerWord, sizeMysteryWord, &player[i].nbreCoup); // prendre chaque letter des 2 tableau et le compare si trouver ajoute a letter find
+            testLetterInWord(&player[i], mysteryWord, sizeMysteryWord); // prendre chaque letter des 2 tableau et le compare si trouver ajoute a letter find
 
             win = testWin(mysteryWord, player[i].playerWord, sizeMysteryWord);
             if (win == 1)

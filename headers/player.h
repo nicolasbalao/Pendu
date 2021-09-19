@@ -9,6 +9,8 @@ struct Player
     int nbreCoup;
     int statu; // 0 = player who play the game 1= player dead  2 = player who choose the word
     char name[20];
+    char letterWrong[10];
+    int indexLetterWrong;
     char letter;
     char playerWord[20];
 };
